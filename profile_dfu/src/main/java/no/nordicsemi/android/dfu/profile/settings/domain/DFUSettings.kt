@@ -34,11 +34,11 @@ package no.nordicsemi.android.dfu.profile.settings.domain
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
-internal const val NUMBER_OF_POCKETS_INITIAL = 12
+internal const val NUMBER_OF_POCKETS_INITIAL = 6
 
 @Parcelize
 data class DFUSettings(
-    val packetsReceiptNotification: Boolean = false,
+    val packetsReceiptNotification: Boolean = true,
     val numberOfPackets: Int = NUMBER_OF_POCKETS_INITIAL,
     val keepBondInformation: Boolean = false,
     val externalMcuDfu: Boolean = false,
@@ -46,6 +46,6 @@ data class DFUSettings(
     val prepareDataObjectDelay: Int = 400, // ms
     val rebootTime: Int = 0, // ms
     val scanTimeout: Int = 2_000, // ms
-    val forceScanningInLegacyDfu: Boolean = false,
+    val forceScanningInLegacyDfu: Boolean = true,
     val showWelcomeScreen: Boolean = true
 ) : Parcelable

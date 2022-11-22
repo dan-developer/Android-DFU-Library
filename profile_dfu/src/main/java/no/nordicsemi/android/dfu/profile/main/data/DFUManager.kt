@@ -32,6 +32,7 @@
 package no.nordicsemi.android.dfu.profile.main.data
 
 import android.content.Context
+import android.util.Log
 import dagger.hilt.android.qualifiers.ApplicationContext
 import no.nordicsemi.android.common.logger.LoggerAppRunner
 import no.nordicsemi.android.common.logger.NordicLogger
@@ -50,6 +51,8 @@ class DFUManager @Inject constructor(
     private val loggerFactory: NordicLoggerFactory
 ) {
     private var _logger: NordicLogger? = null
+
+    private val TAG = "DAN_CUSTOMIZED"
 
     fun install(
         file: ZipFile,
@@ -83,6 +86,11 @@ class DFUManager @Inject constructor(
             setPacketsReceiptNotificationsEnabled(settings.packetsReceiptNotification)
             setPacketsReceiptNotificationsValue(settings.numberOfPackets)
         }
+
+        starter.setNumberOfRetries(5)
+        starter.setMtu(23)
+
+        Log.d(TAG, "'Passou 1')")
 
         starter.setZip(file.uri, null)
         return starter.start(context, DFUService::class.java)
